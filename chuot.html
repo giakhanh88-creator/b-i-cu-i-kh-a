@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOOTGEAR - Gaming Mouse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #050c16;
+            color: white;
+        }
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: linear-gradient(rgba(2, 8, 18, 0.70), rgba(2, 8, 18, 0.92)), url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=2000&q=90");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            min-height: 75px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            background: rgba(3, 9, 18, 0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 234, 255, 0.25);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 900;
+            color: #00eaff;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            white-space: nowrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00eaff;
+        }
+
+        .search {
+            margin-left: auto;
+            width: 280px;
+            height: 42px;
+            display: flex;
+            border: 1px solid rgba(0, 234, 255, 0.45);
+            border-radius: 25px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 0 15px;
+            color: white;
+        }
+
+        .search input::placeholder {
+            color: #9ba7b5;
+        }
+
+        .search button {
+            width: 50px;
+            border: none;
+            background: #00eaff;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .cart {
+            padding: 11px 16px;
+            border-radius: 25px;
+            background: #00eaff;
+            color: #00131b;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .hero {
+            min-height: 430px;
+            padding: 70px 8%;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(2, 8, 18, 0.95), rgba(2, 8, 18, 0.45));
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero small {
+            color: #00eaff;
+            letter-spacing: 4px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            margin: 18px 0;
+            font-size: clamp(45px, 7vw, 75px);
+            line-height: 1;
+        }
+
+        .hero h1 span {
+            color: #00eaff;
+            text-shadow: 0 0 25px rgba(0, 234, 255, 0.45);
+        }
+
+        .hero p {
+            color: #c4ccd7;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .products-section {
+            padding: 70px 7%;
+            background: rgba(3, 9, 18, 0.94);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #99a6b6;
+        }
+
+        .filter {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .filter button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 234, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter button:hover,
+        .filter button.active {
+            background: #00eaff;
+            color: #00131b;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            overflow: hidden;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            border-color: #00eaff;
+            box-shadow: 0 15px 35px rgba(0, 234, 255, 0.12);
+        }
+
+        .product-image {
+            height: 230px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #142337, #07111e);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .product:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .sale-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 6px 10px;
+            border-radius: 5px;
+            background: #ff304f;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .product-info p {
+            min-height: 42px;
+            color: #9ba8b8;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .rating {
+            margin: 12px 0;
+            color: #ffd700;
+        }
+
+        .price-container {
+            margin-top: auto;
+        }
+
+        .price {
+            color: #00eaff;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .old-price {
+            margin-left: 7px;
+            color: #717e8d;
+            font-size: 13px;
+            text-decoration: line-through;
+        }
+
+        .add-cart {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #00eaff;
+            color: #00131b;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-cart:hover {
+            background: white;
+            transform: scale(1.02);
+        }
+
+        .features {
+            margin-top: 70px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            padding: 25px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #8f9baa;
+            font-size: 14px;
+        }
+
+        footer {
+            padding: 45px 7%;
+            background: #030811;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        footer h3 {
+            margin-bottom: 15px;
+            color: #00eaff;
+        }
+
+        footer p,
+        footer a {
+            color: #8995a5;
+            line-height: 2;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .copyright {
+            grid-column: 1 / -1;
+            padding-top: 25px;
+            text-align: center;
+            color: #687484;
+            border-top: 1px solid #182230;
+        }
+
+        @media (max-width: 1200px) {
+            nav {
+                gap: 12px;
+            }
+            nav a {
+                font-size: 13px;
+            }
+            .search {
+                width: 220px;
+            }
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 800px) {
+            header {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+            nav {
+                display: none;
+            }
+            .search {
+                order: 3;
+                width: 100%;
+                margin: 0;
+            }
+            .cart {
+                margin-left: auto;
+            }
+            .hero {
+                padding: 60px 25px;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .products {
+                grid-template-columns: 1fr;
+            }
+            .products-section {
+                padding: 60px 20px;
+            }
+            .hero h1 {
+                font-size: 48px;
+            }
+            footer {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+            .copyright {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <header>
+        <div class="logo">
+            FOOT<span>GEAR</span>
+        </div>
+        <nav>
+            <a href="trangchu.html">Trang chủ</a>
+            <a href="#products">Chuột Gaming</a>
+            <a href="#features">Dịch vụ</a>
+            <a href="#contact">Liên hệ</a>
+        </nav>
+        <div class="search">
+            <input type="text" id="search" placeholder="Tìm chuột gaming..." onkeyup="searchProduct()">
+            <button>🔍</button>
+        </div>
+        <div class="cart" onclick="showCart()">
+            🛒 Giỏ hàng <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <small>FOOTGEAR GAMING</small>
+            <h1>GAMING<br><span>MOUSE</span></h1>
+            <p>Khám phá bộ sưu tập chuột gaming hiệu năng cao. Độ chính xác tuyệt đối, trọng lượng nhẹ và thiết kế dành riêng cho những game thủ chuyên nghiệp.</p>
+        </div>
+    </section>
+
+    <section class="products-section" id="products">
+        <div class="section-title">
+            <h2>🖱️ Chuột Gaming</h2>
+            <p>Lựa chọn con chuột phù hợp với phong cách chơi của bạn</p>
+        </div>
+        <div class="filter">
+            <button class="active" onclick="filterProducts('all', this)">Tất cả</button>
+            <button onclick="filterProducts('fps', this)">FPS</button>
+            <button onclick="filterProducts('wireless', this)">Không dây</button>
+            <button onclick="filterProducts('cheap', this)">Giá tốt</button>
+        </div>
+
+        <div class="products">
+            <div class="product" data-name="footgear mouse x1" data-type="fps" data-price="899000">
+                <div class="product-image">
+                    <span class="sale-tag">-25%</span>
+                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80" alt="FOOTGEAR MOUSE X1">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3>FOOTGEAR MOUSE X1</h3>
+                        <p>26.000 DPI, cảm biến chính xác, trọng lượng siêu nhẹ.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                    <div class="price-container">
+                        <span class="price">899.000₫</span>
+                        <span class="old-price">1.199.000₫</span>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR MOUSE X1')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product" data-name="footgear mouse pro" data-type="wireless" data-price="1090000">
+                <div class="product-image">
+                    <span class="sale-tag">HOT</span>
+                    <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80" alt="FOOTGEAR MOUSE PRO">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3>FOOTGEAR MOUSE PRO</h3>
+                        <p>Chuột không dây, pin 70 giờ, thiết kế siêu nhẹ.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                    <div class="price-container">
+                        <span class="price">1.090.000₫</span>
+                        <span class="old-price">1.390.000₫</span>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR MOUSE PRO')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product" data-name="footgear speed x" data-type="fps" data-price="690000">
+                <div class="product-image">
+                    <img src="https://th.bing.com/th/id/OIP.OPYJyJG4p5_ZjA7n0g5C7AHaHa?w=181&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="FOOTGEAR SPEED X">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3>FOOTGEAR SPEED X</h3>
+                        <p>16.000 DPI, phản hồi nhanh, phù hợp game FPS.</p>
+                        <div class="rating">★★★★☆</div>
+                    </div>
+                    <div class="price-container">
+                        <span class="price">690.000₫</span>
+                        <span class="old-price">890.000₫</span>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR SPEED X')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product" data-name="footgear air wireless" data-type="wireless" data-price="1290000">
+                <div class="product-image">
+                    <span class="sale-tag">NEW</span>
+                    <img src="https://th.bing.com/th?q=Razer+DeathAdder+Gaming+Mouse&w=120&h=120&c=1&rs=1&qlt=70&r=0&o=7&cb=1&dpr=1.3&pid=InlineBlock&rm=3&mkt=en-WW&cc=VN&setlang=en&adlt=moderate&t=1&mw=247" alt="FOOTGEAR AIR WIRELESS">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3>FOOTGEAR AIR WIRELESS</h3>
+                        <p>Kết nối Wireless 2.4GHz, pin lên đến 80 giờ.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                    <div class="price-container">
+                        <span class="price">1.290.000₫</span>
+                        <span class="old-price">1.590.000₫</span>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR AIR WIRELESS')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product" data-name="footgear mini" data-type="cheap" data-price="490000">
+                <div class="product-image">
+                    <img src="https://th.bing.com/th/id/OIP.b9_Si6aY9Wbep4srg9yQegHaHa?w=171&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="FOOTGEAR MINI">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3>FOOTGEAR MINI</h3>
+                        <p>Thiết kế nhỏ gọn, phù hợp học sinh và sinh viên.</p>
+                        <div class="rating">★★★★☆</div>
+                    </div>
+                    <div class="price-container">
+                        <span class="price">490.000₫</span>
+                        <span class="old-price">650.000₫</span>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR MINI')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product" data-name="footgear elite" data-type="fps" data-price="1490000">
+                <div class="product-image">
+                    <span class="sale-tag">PRO</span>
+                    <img src="https://th.bing.com/th/id/OIP.whWsy4STSYxEu84KRKRDlQHaHa?w=182&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="FOOTGEAR ELITE">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3>FOOTGEAR ELITE</h3>
+                        <p>Cảm biến flagship, độ chính xác cực cao.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                    <div class="price-container">
+                        <span class="price">1.490.000₫</span>
+                        <span class="old-price">1.790.000₫</span>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR ELITE')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product" data-name="footgear basic" data-type="cheap" data-price="390000">
+                <div class="product-image">
+                    <img src="https://th.bing.com/th/id/OIP.fjQB5ybGvwcXzByHtBaH5wAAAA?w=212&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="FOOTGEAR BASIC">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3>FOOTGEAR BASIC</h3>
+                        <p>Chuột gaming giá tốt, RGB và 8.000 DPI.</p>
+                        <div class="rating">★★★★☆</div>
+                    </div>
+                    <div class="price-container">
+                        <span class="price">390.000₫</span>
+                        <span class="old-price">520.000₫</span>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR BASIC')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product" data-name="footgear ultimate wireless" data-type="wireless" data-price="1790000">
+                <div class="product-image">
+                    <span class="sale-tag">PRO</span>
+                    <img src="https://th.bing.com/th/id/OIP.iSkVImnQC0WCdTOIFXA8AQAAAA?w=163&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="FOOTGEAR ULTIMATE">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3>FOOTGEAR ULTIMATE</h3>
+                        <p>Wireless cao cấp, cảm biến 30.000 DPI.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                    <div class="price-container">
+                        <span class="price">1.790.000₫</span>
+                        <span class="old-price">2.190.000₫</span>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR ULTIMATE')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features" id="features">
+            <div class="feature">
+                <div class="feature-icon">🚚</div>
+                <h3>Giao hàng nhanh</h3>
+                <p>Giao hàng toàn quốc</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <h3>Bảo hành chính hãng</h3>
+                <p>Hỗ trợ bảo hành sản phẩm</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💳</div>
+                <h3>Thanh toán an toàn</h3>
+                <p>Nhiều phương thức thanh toán</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div>
+            <h3>FOOTGEAR</h3>
+            <p>Gaming Mouse Store dành cho game thủ.</p>
+        </div>
+        <div>
+            <h3>Danh mục</h3>
+            <p><a href="#products">Chuột Gaming</a></p>
+            <p><a href="#features">Dịch vụ</a></p>
+        </div>
+        <div>
+            <h3>Liên hệ</h3>
+            <p>📞 0123 456 789</p>
+            <p>📧 footgear@gmail.com</p>
+            <p>📍 Hà Nội, Việt Nam</p>
+        </div>
+        <div class="copyright">
+            © 2026 FOOTGEAR Gaming Store. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        let cartCount = 0;
+        function addCart(productName) {
+            cartCount++;
+            document.getElementById("cart-count").innerText = cartCount;
+            alert("✅ Đã thêm " + productName + " vào giỏ hàng!");
+        }
+
+        function showCart() {
+            if (cartCount === 0) {
+                alert("🛒 Giỏ hàng đang trống!");
+            } else {
+                alert("🛒 Giỏ hàng hiện có " + cartCount + " sản phẩm.");
+            }
+        }
+
+        function searchProduct() {
+            let keyword = document.getElementById("search").value.toLowerCase().trim();
+            let products = document.querySelectorAll(".product");
+            products.forEach(function(product) {
+                let name = product.getAttribute("data-name").toLowerCase();
+                if (name.includes(keyword)) {
+                    product.style.display = "flex";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
+
+        function filterProducts(type, button) {
+            let products = document.querySelectorAll(".product");
+            let buttons = document.querySelectorAll(".filter button");
+
+            buttons.forEach(function(btn) {
+                btn.classList.remove("active");
+            });
+            button.classList.add("active");
+
+            products.forEach(function(product) {
+                let productType = product.getAttribute("data-type");
+                let price = Number(product.getAttribute("data-price"));
+
+                if (type === "all") {
+                    product.style.display = "flex";
+                } else if (type === productType) {
+                    product.style.display = "flex";
+                } else if (type === "cheap" && price <= 900000) {
+                    product.style.display = "flex";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

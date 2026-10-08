@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOOTGEAR - Gaming Controller Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a,
+        a:hover,
+        a:focus,
+        a:active {
+            text-decoration: none !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #06101c;
+            color: white;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: linear-gradient(rgba(2, 8, 18, 0.65), rgba(2, 8, 18, 0.9)), url("https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=2000&q=90");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            min-height: 75px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            background: rgba(3, 9, 18, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 234, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 900;
+            color: #00eaff;
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            white-space: nowrap;
+        }
+
+        nav a {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00eaff;
+        }
+
+        .header-search {
+            flex: 1;
+            max-width: 330px;
+            min-width: 180px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 234, 255, 0.45);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .header-search:focus-within {
+            border-color: #00eaff;
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.25);
+        }
+
+        .header-search input {
+            flex: 1;
+            height: 100%;
+            padding: 0 16px;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: white;
+            font-size: 14px;
+        }
+
+        .header-search input::placeholder {
+            color: #9ba7b6;
+        }
+
+        .header-search button {
+            width: 50px;
+            height: 100%;
+            border: none;
+            background: #00eaff;
+            cursor: pointer;
+            font-size: 17px;
+            transition: 0.3s;
+        }
+
+        .header-search button:hover {
+            background: white;
+        }
+
+        .cart {
+            padding: 11px 16px;
+            border-radius: 25px;
+            background: #00eaff;
+            color: #00141c;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .cart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+        }
+
+        #cart-count {
+            margin-left: 4px;
+        }
+
+        .hero {
+            min-height: 550px;
+            padding: 80px 8%;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .hero small {
+            color: #00eaff;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .hero h1 {
+            margin: 20px 0;
+            font-size: clamp(40px, 6vw, 80px);
+            line-height: 0.95;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: #00eaff;
+            text-shadow: 0 0 25px rgba(0, 234, 255, 0.5);
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin-bottom: 30px;
+            color: #d0d8e2;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #00eaff;
+            color: #00131b;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 234, 255, 0.35);
+        }
+
+        .btn-secondary {
+            border: 1px solid #00eaff;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #00eaff;
+            color: #00131b;
+        }
+
+        section {
+            padding: 80px 7%;
+            background: rgba(3, 9, 18, 0.88);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            margin-bottom: 10px;
+            font-size: 40px;
+        }
+
+        .section-title p {
+            color: #9ca8b7;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product {
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            border-color: #00eaff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #142338, #07111f);
+            font-size: 90px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .description {
+            min-height: 45px;
+            color: #9ba8b8;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .rating {
+            margin: 12px 0;
+            color: #ffd700;
+        }
+
+        .price {
+            color: #00eaff;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .old-price {
+            margin-left: 7px;
+            color: #778392;
+            font-size: 13px;
+            text-decoration: line-through;
+        }
+
+        .add-cart {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #00eaff;
+            color: #00131b;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-cart:hover {
+            background: white;
+            transform: scale(1.02);
+        }
+
+        .no-result {
+            display: none;
+            grid-column: 1/-1;
+            padding: 40px;
+            text-align: center;
+            color: #9ca8b7;
+            font-size: 18px;
+        }
+
+        footer {
+            padding: 50px 7%;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            background: #030811;
+        }
+
+        footer h3 {
+            margin-bottom: 15px;
+            color: #00eaff;
+        }
+
+        footer p,
+        footer a {
+            color: #8c98a8;
+            line-height: 2;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .copyright {
+            grid-column: 1/-1;
+            padding-top: 25px;
+            text-align: center;
+            color: #687484;
+            border-top: 1px solid #182230;
+        }
+
+        @media (max-width:1200px) {
+            header {
+                gap: 15px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width:850px) {
+            header {
+                min-height: 75px;
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .header-search {
+                order: 3;
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+
+            .cart {
+                margin-left: auto;
+            }
+
+            .hero {
+                min-height: 550px;
+                padding: 60px 25px;
+            }
+
+            .hero h1 {
+                font-size: 55px;
+            }
+        }
+
+        @media (max-width:600px) {
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            footer {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+
+            .copyright {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <header>
+        <div class="logo">FOOT<span>GEAR</span></div>
+        <nav>
+            <a href="trangchu.html">Trang chủ</a>
+            <a href="#formps">Form PS (PlayStation)</a>
+            <a href="#formthuong">Form Thường (Xbox/Standard)</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="#contact">Liên hệ</a>
+        </nav>
+        <div class="header-search">
+            <input type="text" id="search" placeholder="Tìm kiếm tay cầm..." onkeyup="searchProduct()">
+            <button onclick="searchQuery()">🔍</button>
+        </div>
+        <div class="cart" onclick="showCart()">🛒 Giỏ hàng <span id="cart-count">0</span></div>
+    </header>
+    <main id="home">
+        <div class="hero">
+            <div class="hero-content">
+                <small>PRECISION GAMEPADS</small>
+                <h1>PHÂN LOẠI<br><span>TAY CẦM CHƠI GAME</span></h1>
+                <p>Lựa chọn form dáng tay cầm phù hợp với thói quen của bạn: Form PS đối xứng kinh điển hoặc Form Thường
+                    (Xbox) bất đối xứng ôm tay thoải mái.</p>
+                <div class="buttons">
+                    <a href="#formps" class="btn btn-primary">Form PS</a>
+                    <a href="#formthuong" class="btn btn-secondary">Form Thường</a>
+                </div>
+            </div>
+        </div>
+        <section id="formps">
+            <div class="section-title">
+                <h2>Tay Cầm Form PS (PlayStation Style)</h2>
+                <p>Thiết kế cần analog đối xứng đặc trưng, thon gọn, quen thuộc cho game đối kháng và hành động</p>
+            </div>
+            <div class="products" id="product-list-1">
+                <div class="product" data-name="controller tay cam form ps dual shock wireless">
+                    <div class="product-image">🎮</div>
+                    <div class="product-info">
+                        <h3>FOOTGEAR DUAL SHOCK</h3>
+                        <p class="description">Form dáng đối xứng chuẩn PS, kết nối không dây đa nền tảng.</p>
+                        <div class="rating">★★★★★</div>
+                        <div>
+                            <span class="price">890.000₫</span>
+                            <span class="old-price">1.190.000₫</span>
+                        </div>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR DUAL SHOCK')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product" data-name="controller tay cam form ps cyber station pro">
+                    <div class="product-image">🎮</div>
+                    <div class="product-info">
+                        <h3>CYBER STATION PRO</h3>
+                        <p class="description">Cảm ứng chạm giả lập chuẩn PS5, đèn LED trạng thái thời thượng.</p>
+                        <div class="rating">★★★★★</div>
+                        <div>
+                            <span class="price">1.390.000₫</span>
+                            <span class="old-price">1.690.000₫</span>
+                        </div>
+                        <button class="add-cart" onclick="addCart('CYBER STATION PRO')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product" data-name="controller tay cam form ps titan dual sense">
+                    <div class="product-image">🎮</div>
+                    <div class="product-info">
+                        <h3>TITAN DUAL SENSE</h3>
+                        <p class="description">Phản hồi xúc giác nâng cao, cò cơ học tùy chỉnh hành trình.</p>
+                        <div class="rating">★★★★☆</div>
+                        <div>
+                            <span class="price">1.790.000₫</span>
+                            <span class="old-price">2.190.000₫</span>
+                        </div>
+                        <button class="add-cart" onclick="addCart('TITAN DUAL SENSE')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product" data-name="controller tay cam form ps retro play x">
+                    <div class="product-image">🎮</div>
+                    <div class="product-info">
+                        <h3>RETRO PLAY X</h3>
+                        <p class="description">Tay cầm form PlayStation nhỏ gọn, chuyên chơi giả lập và game PC.</p>
+                        <div class="rating">★★★★☆</div>
+                        <div>
+                            <span class="price">550.000₫</span>
+                            <span class="old-price">750.000₫</span>
+                        </div>
+                        <button class="add-cart" onclick="addCart('RETRO PLAY X')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="formthuong" style="background:rgba(2,6,12,0.92);">
+            <div class="section-title">
+                <h2>Tay Cầm Form Thường (Xbox / Standard Style)</h2>
+                <p>Thiết kế cần analog lệch nhau công thái học, báng cầm lớn ôm trọn lòng bàn tay</p>
+            </div>
+            <div class="products" id="product-list-2">
+                <div class="product" data-name="controller tay cam form thuong xbox standard wireless">
+                    <div class="product-image">🕹️</div>
+                    <div class="product-info">
+                        <h3>FOOTGEAR X-STANDARD</h3>
+                        <p class="description">Form Xbox bất đối xứng kinh điển, cầm nắm cực kỳ đầm tay.</p>
+                        <div class="rating">★★★★★</div>
+                        <div>
+                            <span class="price">990.000₫</span>
+                            <span class="old-price">1.290.000₫</span>
+                        </div>
+                        <button class="add-cart" onclick="addCart('FOOTGEAR X-STANDARD')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product" data-name="controller tay cam form thuong storm x wireless">
+                    <div class="product-image">🕹️</div>
+                    <div class="product-info">
+                        <h3>STORM X WIRELESS</h3>
+                        <p class="description">Trang bị cần analog hiệu ứng Hall chống trôi, chống mỏi tốt.</p>
+                        <div class="rating">★★★★★</div>
+                        <div>
+                            <span class="price">1.490.000₫</span>
+                            <span class="old-price">1.790.000₫</span>
+                        </div>
+                        <button class="add-cart" onclick="addCart('STORM X WIRELESS')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product" data-name="controller tay cam form thuong titan elite x">
+                    <div class="product-image">🕹️</div>
+                    <div class="product-info">
+                        <h3>TITAN ELITE X</h3>
+                        <p class="description">Tích hợp nút macro mặt lưng, grip cao su chống trượt cao cấp.</p>
+                        <div class="rating">★★★★☆</div>
+                        <div>
+                            <span class="price">1.890.000₫</span>
+                            <span class="old-price">2.290.000₫</span>
+                        </div>
+                        <button class="add-cart" onclick="addCart('TITAN ELITE X')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product" data-name="controller tay cam form thuong basic wired x">
+                    <div class="product-image">🕹️</div>
+                    <div class="product-info">
+                        <h3>BASIC WIRED X</h3>
+                        <p class="description">Tay cầm có dây form Xbox giá rẻ, cắm là nhận diện ngay trên PC.</p>
+                        <div class="rating">★★★★☆</div>
+                        <div>
+                            <span class="price">490.000₫</span>
+                            <span class="old-price">650.000₫</span>
+                        </div>
+                        <button class="add-cart" onclick="addCart('BASIC WIRED X')">🛒 Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+            <div class="no-result" id="no-result" style="display:none;">❌ Không tìm thấy tay cầm phù hợp.</div>
+        </section>
+    </main>
+    <footer id="contact">
+        <div>
+            <h3>FOOTGEAR</h3>
+            <p>Gaming Gear Store cung cấp các dòng tay cầm chơi game chuyên nghiệp hàng đầu.</p>
+        </div>
+        <div>
+            <h3>Liên kết</h3>
+            <p><a href="trangchu.html">Trang chủ</a></p>
+            <p><a href="#formps">Form PS</a></p>
+            <p><a href="#formthuong">Form Thường</a></p>
+        </div>
+        <div>
+            <h3>Liên hệ</h3>
+            <p>📞 0123 456 789</p>
+            <p>📧 footgear@gmail.com</p>
+            <p>📍 Hà Nội, Việt Nam</p>
+        </div>
+        <div class="copyright">© 2026 FOOTGEAR Gaming Store. All Rights Reserved.</div>
+    </footer>
+    <script>
+        let cartCount = 0;
+        function addCart(productName) {
+            cartCount++;
+            document.getElementById("cart-count").innerText = cartCount;
+            alert("✅ Đã thêm " + productName + " vào giỏ hàng!");
+        }
+        function showCart() {
+            if (cartCount === 0) {
+                alert("🛒 Giỏ hàng đang trống!");
+            } else {
+                alert("🛒 Bạn đang có " + cartCount + " sản phẩm trong giỏ hàng.");
+            }
+        }
+        function searchProduct() {
+            let keyword = document.getElementById("search").value.toLowerCase().trim();
+            let products = document.querySelectorAll(".product");
+            let found = 0;
+            products.forEach(function (product) {
+                let name = product.getAttribute("data-name").toLowerCase();
+                if (name.includes(keyword)) {
+                    product.style.display = "block";
+                    found++;
+                } else {
+                    product.style.display = "none";
+                }
+            });
+            let noResult = document.getElementById("no-result");
+            if (found === 0) {
+                noResult.style.display = "block";
+            } else {
+                noResult.style.display = "none";
+            }
+        }
+        function searchQuery() {
+            searchProduct();
+        }
+    </script>
+</body>
+</html>

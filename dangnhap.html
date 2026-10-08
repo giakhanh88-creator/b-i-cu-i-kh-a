@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký tài khoản - FOOTGEAR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            background: #06101c;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: linear-gradient(rgba(2, 8, 18, 0.65), rgba(2, 8, 18, 0.9)), url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=2000&q=90");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        header {
+            min-height: 75px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            background: rgba(3, 9, 18, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 234, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 900;
+            color: #00eaff;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            flex-grow: 1;
+        }
+
+        .register-box {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            background: rgba(3, 9, 18, 0.85);
+            border: 1px solid rgba(0, 234, 255, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .register-box h2 {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 30px;
+            color: white;
+        }
+
+        .register-box h2 span {
+            color: #00eaff;
+        }
+
+        .register-box p.subtitle {
+            text-align: center;
+            color: #9ba8b8;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #d0d8e2;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 234, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #00eaff;
+            box-shadow: 0 0 12px rgba(0, 234, 255, 0.25);
+        }
+
+        .input-group input::placeholder {
+            color: #778392;
+        }
+
+        .btn-submit {
+            width: 100%;
+            height: 48px;
+            border: none;
+            border-radius: 8px;
+            background: #00eaff;
+            color: #00131b;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 234, 255, 0.4);
+        }
+
+        .switch-auth {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #9ba8b8;
+        }
+
+        .switch-auth a {
+            color: #00eaff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .switch-auth a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            padding: 25px 7%;
+            text-align: center;
+            background: #030811;
+            color: #687484;
+            border-top: 1px solid #182230;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+
+    <header>
+        <a href="trangchu.html" class="logo">FOOT<span>GEAR</span></a>
+    </header>
+
+    <div class="register-container">
+        <div class="register-box">
+            <h2>ĐĂNG KÝ <span>TÀI KHOẢN</span></h2>
+            <p class="subtitle">Trở thành thành viên của FOOTGEAR Gaming Store</p>
+            
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="input-group">
+                    <label for="fullname">Họ và tên</label>
+                    <input type="text" id="fullname" placeholder="Nhập họ và tên của bạn" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Nhập địa chỉ email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Xác nhận mật khẩu</label>
+                    <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" required>
+                </div>
+                <button type="submit" class="btn-submit">Đăng ký ngay</button>
+            </form>
+
+            <div class="switch-auth">
+                Đã có tài khoản? <a href="dangnhap.html">Đăng nhập ngay</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 FOOTGEAR Gaming Store. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function handleRegister(event) {
+            event.preventDefault();
+            let fullname = document.getElementById("fullname").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirm-password").value;
+
+            if (password !== confirmPassword) {
+                alert("❌ Mật khẩu xác nhận không khớp!");
+                return;
+            }
+
+            let user = { fullname, email, password };
+            localStorage.setItem("registeredUser", JSON.stringify(user));
+
+            alert("✅ Đăng ký tài khoản thành công! Chào mừng " + fullname + " đến với FOOTGEAR.");
+            window.location.href = "trangchu.html"; // Chuyển hướng về trang chủ hoặc trang đăng nhập
+        }
+    </script>
+</body>
+
+</html>
